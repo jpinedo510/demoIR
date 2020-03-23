@@ -1,8 +1,11 @@
 package com.demoir.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 
 @Entity
@@ -12,10 +15,8 @@ public class Cliente {
     private int id;
     private String nombre;
     private String apellido;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fechaNacimiento;
-    @Transient
-    @JsonIgnore
-    private String fechaMuerte;
 
     public int getId() {
         return id;
@@ -49,14 +50,6 @@ public class Cliente {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public String getFechaMuerte() {
-        return fechaMuerte;
-    }
-
-    public void setFechaMuerte(String fechaMuerte) {
-        this.fechaMuerte = fechaMuerte;
-    }
-
     @Override
     public String toString() {
         return "Cliente{" +
@@ -64,7 +57,6 @@ public class Cliente {
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", fechaNacimiento=" + fechaNacimiento +
-                ", fechaMuerte='" + fechaMuerte + '\'' +
                 '}';
     }
 }

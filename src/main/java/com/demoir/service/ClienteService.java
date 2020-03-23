@@ -1,12 +1,15 @@
 package com.demoir.service;
 
 import com.demoir.model.Cliente;
-import com.demoir.model.KpiClienteResponse;
+import com.demoir.reponse.bean.ClienteResponse;
+import com.demoir.reponse.bean.KpiClienteResponse;
 import com.demoir.repository.ClienteRepository;
+import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,6 +20,7 @@ public class ClienteService {
 
     @Autowired
     private ClienteRepository clienteRepository;
+    private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
     /*** SERVICIO "creacliente" ***/
     public void creacliente(Cliente cliente) {
@@ -106,13 +110,19 @@ public class ClienteService {
     }
 
     /*** SERVICIO "listclientes" ***/
-    public List<Cliente> listclientes() {
+    public List<ClienteResponse> listclientes() {
         List<Cliente> clientes = clienteRepository.findAll();
+        List<ClienteResponse> clienteResponses = new ArrayList<>();
         clientes.forEach(cliente -> {
-            cliente.setFechaMuerte("Fecha probable de muerte en " +
+            ClienteResponse clienteResponse = new ClienteResponse();
+            clienteResponse.setNombre(cliente.getNombre());
+            clienteResponse.setApellido(cliente.getApellido());
+            clienteResponse.setFechaNacimiento(df.format(cliente.getFechaNacimiento()));
+            clienteResponse.setFechaMuerte("Fecha probable de muerte en " +
                     getFechaProbableMuerte(cliente.getFechaNacimiento()) + " años.");
         });
-        return clientes;
+
+        return clienteResponses;
     }
 
     private int getFechaProbableMuerte(Date fechaNacimiento) {

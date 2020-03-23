@@ -1,7 +1,8 @@
 package com.demoir.rest;
 
 import com.demoir.model.Cliente;
-import com.demoir.model.KpiClienteResponse;
+import com.demoir.reponse.bean.ClienteResponse;
+import com.demoir.reponse.bean.KpiClienteResponse;
 import com.demoir.service.ClienteService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class ClienteRestController {
     }
 
     @GetMapping("/listclientes")
-    public List<Cliente> listclientes() {
+    public List<ClienteResponse> listclientes() {
         return clienteService.listclientes();
     }
 }

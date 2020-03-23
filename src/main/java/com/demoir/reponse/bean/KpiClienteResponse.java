@@ -1,4 +1,4 @@
-package com.demoir.model;
+package com.demoir.reponse.bean;
 
 public class KpiClienteResponse {
 
