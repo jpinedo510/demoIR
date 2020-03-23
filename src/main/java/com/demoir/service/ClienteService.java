@@ -84,7 +84,9 @@ public class ClienteService {
         int n = x.size();
         double u = getPromedioEdadesClientes(clientes);
         double sumatoriadeXmenosUelevadoal2 = sumatoriadeXmenosUelevadoal2(x, u);
-        return Math.sqrt(sumatoriadeXmenosUelevadoal2 / n);
+        return BigDecimal.valueOf(Math.sqrt(sumatoriadeXmenosUelevadoal2 / n))
+                .setScale(2, BigDecimal.ROUND_HALF_UP)
+                .doubleValue();
     }
 
     private List<Integer> getEdadesClientes(List<Cliente> clientes) {
