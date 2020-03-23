@@ -120,6 +120,8 @@ public class ClienteService {
             clienteResponse.setFechaNacimiento(df.format(cliente.getFechaNacimiento()));
             clienteResponse.setFechaMuerte("Fecha probable de muerte en " +
                     getFechaProbableMuerte(cliente.getFechaNacimiento()) + " años.");
+
+            clienteResponses.add(clienteResponse);
         });
 
         return clienteResponses;
