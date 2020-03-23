@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -18,13 +17,12 @@ public class ClienteService {
 
     @Autowired
     private ClienteRepository clienteRepository;
-    private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
     /*** SERVICIO "creacliente" ***/
     public void creacliente(Cliente cliente) {
+        cliente.setId(clienteRepository.findAll().size() + 1);
         clienteRepository.save(cliente);
     }
-
 
     /*** SERVICIO "kpiclientes" ***/
     public KpiClienteResponse kpideclientes() {

@@ -1,5 +1,7 @@
 package com.demoir.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,6 +14,7 @@ public class Cliente {
     private String apellido;
     private Date fechaNacimiento;
     @Transient
+    @JsonIgnore
     private String fechaMuerte;
 
     public int getId() {
